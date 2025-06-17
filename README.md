@@ -111,3 +111,4 @@ Note: To use ES modules, add "type": "module" to your package.json or use .mjs f
 
 - [path](./path/README.md)
 - [fs](./fs/README.md)
+- [http](./http/README.md)
