@@ -110,3 +110,4 @@ Note: To use ES modules, add "type": "module" to your package.json or use .mjs f
 # Built-in Modules
 
 - [path](./path/README.md)
+- [fs](./fs/README.md)
