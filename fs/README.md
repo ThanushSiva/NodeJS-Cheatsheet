@@ -15,6 +15,7 @@ The fs (File System) module is one of the most important built-in modules in Nod
 - [Working with Directories](#working-with-directories)
 - [File-Directory Information](#file-directory-information)
 - [File Operations](#file-operations)
+- [Streaming Files](#Streaming-Files)
 - [Watching Files-Directories](#watching-files-directories)
 - [Error Handling](#error-handling)
 
@@ -175,6 +176,41 @@ fs.rename('old-name.txt', 'new-name.txt', (err) => {
 fs.unlink('file-to-delete.txt', (err) => {
   if (err) throw err;
   console.log('File deleted!');
+});
+```
+
+# Streaming Files
+
+For large files, use streams to avoid loading everything into memory
+
+```js
+// Read stream
+const readStream = fs.createReadStream('large-file.txt', {
+    encoding:'utf8',
+    highWaterMark: 2
+});
+
+readStream.on('data', (chunk) => {
+  console.log('Received chunk:', chunk.length, 'characters');
+});
+
+readStream.on('end', () => {
+  console.log('Finished reading file');
+});
+
+readStream.on('error', (err) => {
+  console.error('Error:', err);
+});
+
+// Write stream
+const writeStream = fs.createWriteStream('output-file.txt');
+
+writeStream.write('First line\n');
+writeStream.write('Second line\n');
+writeStream.end();
+
+writeStream.on('finish', () => {
+  console.log('Finished writing file');
 });
 ```
 
